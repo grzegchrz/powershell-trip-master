@@ -1,0 +1,13 @@
+Import-Module ActiveDirectory
+$csv = "C:\Users\grzegorz.chrzastek.a\Desktop\script\lastLogon.csv"
+$Computers = Get-ADComputer -Filter * -SearchBase "OU=1,OU=2,DC=domain,DC=lcl" | Select Name | Sort-Object Name
+$Computers = $Computers.Name
+
+foreach ($computer in $Computers)
+{
+    
+    Get-ADComputer -Identity $computer -Properties * `
+    | Select Name,passwordlastset,@{n='LastLogon';e={[DateTime]::FromFileTime($_.LastLogon)}},whenCreated,enabled,OperatingSystem,distinguishedName,description `
+    | Export-CSV $csv -NoTypeInformation -Append
+    
+ }

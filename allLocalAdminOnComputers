@@ -1,0 +1,8 @@
+#Wyszukanie wszytstkich komputerów i wylistownie ich po nazwie 
+Get-ADComputer -Filter * -Property * | Select-Object Name
+#Przeszukanie lokalnej grupy Administratorzy i wylistowanie użytkowników
+$LocalGroup = 'Administratorzy'
+
+$ADSI = [ADSI]("WinNT://$RemoteComputerName,Computer")
+$Group = $ADSI.PSBase.Children.Find($LocalGroup,'Group')
+$Group.PSBase.Invoke('Members').Foreach{ $_.GetType().InvokeMember('Name','GetProperty',$null,$_,$null) }

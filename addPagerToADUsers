@@ -1,0 +1,4 @@
+$file = Import-Csv C:\Users\grzegorz.chrzastek\Desktop\ADUsersPagers\ADUsersPagerGC.csv -Delimiter ";"
+foreach ($f in $file)
+{ Set-ADUser $f.DistinguishedName -Replace @{pager = $f.pager}
+}

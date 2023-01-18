@@ -1,0 +1,3 @@
+Name;GivenName;Surname;sAMAccountName;AccountPassword;Path
+LA Imie Nazwisko;imie;nazwisko;la.imie.nazwisko;dad3423*>@1d9;OU=LA,OU=Groups,DC=domain,DC=lcl
+
